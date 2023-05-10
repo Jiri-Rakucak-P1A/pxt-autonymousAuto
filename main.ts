@@ -6,17 +6,39 @@
     const speed = [0, -210]
     const speed2 = [0, -225]
 
-    input.onButtonPressed(Button.A, function () {
+    function car_motor(lm: number = 0, rm: number = 0) {
+        const ul = Math.map (lm, -100, 100, -255, 255)
+        const ur = Math.map(rm, -100, 100, -255, 255)
+        PCAmotor.MotorRun(PCAmotor.Motors.M1, -ul)
+        PCAmotor.MotorRun(PCAmotor.Motors.M4, -ur)
+    }
 
-        PCAmotor.MotorRun(m1, speed[++rightldx % speed.length])
-    })
+radio.onReceivedValue(function(name: string, value: number) {
+    if (name = "")
+    PCAmotor.MotorRun(m1, speed[++rightldx % speed.length])
+    PCAmotor.MotorRun(m4, speed2[++leftldx % speed.length])
+})
 
-    input.onButtonPressed(Button.B, function () {
+input.onButtonPressed(Button.A, function() {
 
-        PCAmotor.MotorRun(m4, speed2[++leftldx % speed.length])
-    })
+    PCAmotor.MotorRun(m1, speed[++rightldx % speed.length])
+    PCAmotor.MotorRun(m4, speed2[++leftldx % speed.length])
+   
+    PCAmotor.MotorRun(m4, speed[++rightldx % speed.length])
+    PCAmotor.MotorRun(m1, speed2[++leftldx % speed.length])
+    
+    PCAmotor.MotorRun(m1, speed[++rightldx % speed.length])
+    PCAmotor.MotorRun(m4, speed2[++leftldx % speed.length])
 
-    input.onButtonPressed(Button.AB, function () {
+})
+
         
-    })
+
+
+
+   
+        
+
+
+
 
