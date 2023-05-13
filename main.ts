@@ -1,28 +1,61 @@
-    radio.setGroup(160)
-    
-    let m1 = PCAmotor.Motors.M1
-    let m4 = PCAmotor.Motors.M4
+let m1 = PCAmotor.Motors.M1
+let m4 = PCAmotor.Motors.M4
+radio.setGroup(160)
+let leftldx = 0
+let rightldx = 0
+let SpeedLeft = 0
+let SpeedRight = 0
 
-    let leftldx = 0
-    let rightldx = 0
-    let speed = [0, -255]
-    let speed2 = [0, -240]
-    let nspeed = [0, 240]
-    let nspeed2 = [0, 255]
-    
 
-radio.onReceivedString(function(receivedString: string) {
-    if (receivedString == "go") {
-        PCAmotor.MotorRun(m1, speed[++rightldx % speed.length])
-        PCAmotor.MotorRun(m4, speed2[++leftldx % speed.length])
+radio.onReceivedValue(function(name: string, value: number) {
+    if (name == "GOL"){
+        SpeedLeft = value
+        }
+    if (name == "GOR") {
+        SpeedRight = value
     }
-    if (receivedString == "back"){
-        PCAmotor.MotorRun(m1, nspeed[++rightldx % speed.length])
-        PCAmotor.MotorRun(m4, nspeed2[++leftldx % speed.length])
+    if (name == "ReverseL") {
+        SpeedLeft = value
     }
-    
-
+    if (name == "ReverseR") {
+        SpeedRight = value
+    }
+    if (name == "Left") {
+        SpeedLeft = value
+    }
+    if (name == "Right") {
+        SpeedRight = value
+    }
+    radio.onReceivedString(function(receivedString: string) {
+        if(receivedString === "Stop"){
+            PCAmotor.MotorStopAll()
+        }
+    })
 })
+basic.forever(function() {
+    PCAmotor.MotorRun(PCAmotor.Motors.M1, SpeedLeft)
+    PCAmotor.MotorRun(PCAmotor.Motors.M4, SpeedRight)
+})
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -60,85 +93,3 @@ radio.onReceivedString(function(receivedString: string) {
 //     PCAmotor.MotorRun(m1, speed[++rightldx % speed.length])
 //     PCAmotor.MotorRun(m4, speed2[++leftldx % speed.length])
 // })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-/*
-
-input.onButtonPressed(Button.A, function () {
-    control.inBackground(() => {
-        PCAmotor.MotorRun(m1, speed[++rightldx % speed.length])
-        PCAmotor.MotorRun(m4, speed2[++leftldx % speed.length])
-    })
-
-     basic.pause(1000)
-
-    control.inBackground(() => {
-        PCAmotor.MotorRun(m1, nspeed[++rightldx % speed.length])
-        PCAmotor.MotorRun(m4, nspeed2[++leftldx % speed.length])
-    })
-    
-    
-})
-
-control.inBackground(() => {
-    
-})
-
-
-input.onButtonPressed(Button.A, function() {
-    
-})
-
-*/
-
-    
-
-
-
-   
- /*       
-if (x < 4) { x++ }
-if (x == 4) { x = 1 }
-
-
-if (x == 2) {
-    PCAmotor.MotorRun(m1, speed[++rightldx % speed.length])
-    PCAmotor.MotorRun(m4, speed2[++leftldx % speed.length])
-}
-
-if (x == 3) {
-    PCAmotor.MotorRun(m1, nspeed[++rightldx % speed.length])
-    PCAmotor.MotorRun(m4, nspeed2[++leftldx % speed.length])
-}
-if (x == 1) {
-    PCAmotor.MotorRun(m1, stop[++rightldx % speed.length])
-    PCAmotor.MotorRun(m4, stop[++leftldx % speed.length])
-}
-*/
-
-
