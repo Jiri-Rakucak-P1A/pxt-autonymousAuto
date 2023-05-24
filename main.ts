@@ -4,8 +4,10 @@ let speed2 = 0
 let nasobitel = 0
 
 radio.onReceivedValue(function (name: string, value: number) {
-    nasobitel = value
-    console.log(nasobitel)
+    if (name === "nasobitel"){
+        nasobitel = value
+        console.log(nasobitel)
+    }
 })
 basic.forever(function () {
 
@@ -33,3 +35,7 @@ basic.forever(function () {
 
     })
 })
+
+
+
+
