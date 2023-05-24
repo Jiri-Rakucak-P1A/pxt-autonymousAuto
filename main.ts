@@ -2,11 +2,12 @@ radio.setGroup(160)
 let speed1 = 0
 let speed2 = 0
 let nasobitel = 0
+let a = 0
+let b = 0
 
 radio.onReceivedValue(function (name: string, value: number) {
-    if (name === "nasobitel"){
-        nasobitel = value
-        console.log(nasobitel)
+    if (name === "n"){
+    nasobitel = value  
     }
 })
 basic.forever(function () {
@@ -21,7 +22,7 @@ basic.forever(function () {
             speed1 = -100 * nasobitel
         }
         if (receivedString === "R") {
-            speed2 = -80 * nasobitel
+            speed2 = -50 * nasobitel
         }
         if (receivedString === "LGo") {
             speed1 = -255 * nasobitel
