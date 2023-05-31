@@ -44,39 +44,43 @@ pins.setPull(DigitalPin.P15, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P14, PinPullMode.PullNone)
 pins.setPull(DigitalPin.P13, PinPullMode.PullNone)
 
-const center: DigitalPin = DigitalPin.P15
-const left: DigitalPin = DigitalPin.P14
-const right: DigitalPin = DigitalPin.P13
+const c: DigitalPin = DigitalPin.P15
+const l: DigitalPin = DigitalPin.P14
+const r: DigitalPin = DigitalPin.P13
 
-let center1: number = 0
-let right1: number = 0
-let left1: number = 0
+let c1: number = 1
+let r1: number = 1
+let l1: number = 1
 
 let speed = 0
 let speed2 = 0
 
 
 basic.forever(function() {
-    center1 = pins.digitalReadPin(center)
-    left1 = pins.digitalReadPin(left)
-    right1 = pins.digitalReadPin(right)
+    c1 = pins.digitalReadPin(c)
+    l1 = pins.digitalReadPin(l)
+    r1 = pins.digitalReadPin(r)
 
-    if (center1 === 1){
-        speed = -190
-        speed2 = -250
+    if (c1 === 0){
+        speed = -150
+        speed2 = -130
         console.log(1)
         PCAmotor.MotorRun(PCAmotor.Motors.M1, speed)
         PCAmotor.MotorRun(PCAmotor.Motors.M4, speed2)
     }
-    if (center1 === 0){
-        speed = 0
-        speed2 = 0
-        console.log(0)
+    if (r1 === 0){
+        speed = -150
+        speed2 = -80
+        PCAmotor.MotorRun(PCAmotor.Motors.M1, speed)
+        PCAmotor.MotorRun(PCAmotor.Motors.M4, speed2)
+    }
+    if (l1 === 0){
+        speed = -100
+        speed2 = -130
         PCAmotor.MotorRun(PCAmotor.Motors.M1, speed)
         PCAmotor.MotorRun(PCAmotor.Motors.M4, speed2)
 
     }
-
-    
+    basic.pause(50)
 
 })
